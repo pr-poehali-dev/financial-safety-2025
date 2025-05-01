@@ -1,7 +1,6 @@
 
 import React from "react";
 import Icon from "@/components/ui/icon";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface InfoCardProps {
   icon: string;
@@ -17,24 +16,25 @@ const InfoCard: React.FC<InfoCardProps> = ({
   iconColor = "text-primary" 
 }) => {
   return (
-    <Card className="h-full transition-all duration-300 hover:shadow-md">
-      <CardHeader className="flex flex-row items-center gap-4 pb-2">
-        <div className={`p-2 rounded-full bg-accent ${iconColor}`}>
-          <Icon name={icon} size={24} />
+    <div className="bg-card rounded-xl shadow-sm p-6 border border-border/50 h-full">
+      <div className="flex items-center mb-6">
+        <div className={`p-2 rounded-full ${iconColor.replace('text-', 'bg-')}/10 mr-4`}>
+          <Icon name={icon} className={`${iconColor}`} size={24} />
         </div>
-        <CardTitle className="text-xl">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ul className="space-y-3">
-          {items.map((item, index) => (
-            <li key={index} className="flex items-start">
-              <Icon name="CheckCircle" className="text-primary mr-2 shrink-0 mt-1" size={16} />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+        <h3 className="text-xl font-medium">{title}</h3>
+      </div>
+
+      <ul className="space-y-4">
+        {items.map((item, index) => (
+          <li key={index} className="flex">
+            <span className="inline-flex items-center justify-center rounded-full bg-primary/10 p-1 mr-3 mt-0.5">
+              <Icon name="Check" className="text-primary" size={14} />
+            </span>
+            <span className="text-muted-foreground">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
